@@ -83,16 +83,16 @@ Documentation=https://github.com/coreos
 
 [Service]
 Type=notify
-WorkingDirectory=/app/pluops/etcd/
-EnvironmentFile=-/app/pluops/etcd/etc/etcd.conf
+WorkingDirectory=/app/ops/etcd/
+EnvironmentFile=-/app/ops/etcd/etc/etcd.conf
 ExecStart=/usr/local/bin/etcd \
 --name ${ETCD_NAME} \
---cert-file=/etc/kubernetes/ssl/kubernetes.pem \
---key-file=/etc/kubernetes/ssl/kubernetes-key.pem \
---peer-cert-file=/etc/kubernetes/ssl/kubernetes.pem \
---peer-key-file=/etc/kubernetes/ssl/kubernetes-key.pem \
---trusted-ca-file=/etc/kubernetes/ssl/ca.pem \
---peer-trusted-ca-file=/etc/kubernetes/ssl/ca.pem \
+--cert-file=/etc/kubernetes/kubernetes.pem \
+--key-file=/etc/kubernetes/kubernetes-key.pem \
+--peer-cert-file=/etc/kubernetes/kubernetes.pem \
+--peer-key-file=/etc/kubernetes/kubernetes-key.pem \
+--trusted-ca-file=/etc/kubernetes/ca.pem \
+--peer-trusted-ca-file=/etc/kubernetes/ca.pem \
 --initial-advertise-peer-urls ${ETCD_INITIAL_ADVERTISE_PEER_URLS} \
 --listen-peer-urls ${ETCD_LISTEN_PEER_URLS} \
 --listen-client-urls ${ETCD_LISTEN_CLIENT_URLS} \
@@ -108,8 +108,7 @@ LimitNOFILE=65536
 [Install]
 WantedBy=multi-user.target
 ' >/usr/lib/systemd/system/etcd.service
-   sed -i "s@/app/pluops/etcd@${ETCD_INSTALL_PATH}@g" /usr/lib/systemd/system/etcd.service
-   sed -i "s@/etc/kubernetes/ssl@${CONFIG_FILE_PATH}@g" /usr/lib/systemd/system/etcd.service
+   sed -i "s@/app/ops/etcd@${ETCD_INSTALL_PATH}@g" /usr/lib/systemd/system/etcd.service
    sed -i "s@INITIAL_CLUSTER_IP@${ETCD_NODES}@g" /usr/lib/systemd/system/etcd.service
    systemctl enable etcd &>/dev/null
 }
