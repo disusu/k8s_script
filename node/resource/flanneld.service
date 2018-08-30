@@ -1,0 +1,21 @@
+[Unit]
+Description=Flanneld overlay address etcd agent
+After=network.target
+After=network-online.target
+Wants=network-online.target
+After=etcd.service
+Before=docker.service
+
+[Service]
+Type=notify
+ExecStart=/usr/local/bin/flanneld \
+        -etcd-cafile=/etc/kubernetes/ca.pem \
+        -etcd-certfile=/etc/kubernetes/kubernetes.pem \
+        -etcd-keyfile=/etc/kubernetes/kubernetes-key.pem \
+        -etcd-endpoints=ETCD_IPS \
+        -etcd-prefix=/kube/network
+ExecStartPost=/usr/local/bin/mk-docker-opts.sh -k DOCKER_NETWORK_OPTIONS -d /run/flannel/docker
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+RequiredBy=docker.service

@@ -1,0 +1,20 @@
+###
+## kubernetes kubelet (minion) config
+#
+## The port for the info server to serve on
+#KUBELET_PORT="--port=10250"
+#
+## You may leave this blank to use the actual hostname
+KUBELET_HOSTNAME="--hostname-override=192.168.117.133"
+#
+## pod infrastructure container
+KUBELET_POD_INFRA_CONTAINER="--pod-infra-container-image=HUB_ADDR/rhel7/pod-infrastructure:latest"
+# 这里也要用到自己的镜像仓库这里自己仓库中要有
+## Add your own!
+KUBELET_ARGS="--bootstrap-kubeconfig=/etc/kubernetes/bootstrap.kubeconfig \
+          --kubeconfig=/etc/kubernetes/kubelet.kubeconfig \
+          --cert-dir=/etc/kubernetes \
+          --config=/etc/kubernetes/kubelet.config.json \
+          --serialize-image-pulls=false \
+          --container-runtime=docker \
+          --root-dir=NODE_DIR"

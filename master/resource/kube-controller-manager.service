@@ -1,0 +1,33 @@
+[Unit]
+Description=Kubernetes Controller Manager
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+
+[Service]
+EnvironmentFile=-/etc/kubernetes/config
+EnvironmentFile=-/etc/kubernetes/kube-controller-manager
+ExecStart=/usr/local/bin/kube-controller-manager \
+        --bind-address=127.0.0.1 \
+        --port=0 \
+        --secure-port=10252 \
+        --service-cluster-ip-range=SVC_CIRD \
+        --cluster-cidr=POD_CIRD \
+        --allocate-node-cidrs=true \
+        --kubeconfig=/etc/kubernetes/kube-controller-manager.kubeconfig \
+        --cluster-name=kubernetes \
+        --feature-gates=RotateKubeletServerCertificate=true \
+        --experimental-cluster-signing-duration=87600h \
+        --cluster-signing-cert-file=/etc/kubernetes/ca.pem \
+        --cluster-signing-key-file=/etc/kubernetes/ca-key.pem  \
+        --service-account-private-key-file=/etc/kubernetes/ca-key.pem \
+        --root-ca-file=/etc/kubernetes/ca.pem \
+        --tls-cert-file=/etc/kubernetes/kubernetes.pem \
+        --tls-private-key-file=/etc/kubernetes/kubernetes-key.pem \
+        --leader-elect=true \
+        --use-service-account-credentials=true \
+        --horizontal-pod-autoscaler-sync-period=10s \
+        --horizontal-pod-autoscaler-use-rest-clients=true
+Restart=on-failure
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,51 @@
+###
+## kubernetes system config
+##
+## The following values are used to configure the kube-apiserver
+##
+#
+## The address on the local server to listen to.
+KUBE_API_ADDRESS="--advertise-address=192.168.117.132 --bind-address=192.168.117.132"
+#
+## The port on the local server to listen on.
+#KUBE_API_PORT="--port=8080"
+#
+## Port minions listen on
+#KUBELET_PORT="--kubelet-port=10250"
+#
+## Comma separated list of nodes in the etcd cluster
+KUBE_ETCD_SERVERS="--etcd-servers=ETCD_IPS"
+#
+## Address range to use for services
+KUBE_SERVICE_ADDRESSES="--service-cluster-ip-range=SVC_CIRD"
+#
+## default admission control policies
+#KUBE_ADMISSION_CONTROL="--admission-control=ServiceAccount,NamespaceLifecycle,NamespaceExists,LimitRanger,ResourceQuota"
+KUBE_ADMISSION_CONTROL="--enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota,NodeRestriction"
+#
+## Add your own!
+KUBE_API_ARGS=" --enable-bootstrap-token-auth \
+                --authorization-mode=RBAC,Node \
+                --anonymous-auth=false \
+                --insecure-port=0 \
+                --runtime-config=api/all \
+                --kubelet-https=true \
+                --token-auth-file=/etc/kubernetes/token.csv \
+                --experimental-encryption-provider-config=/etc/kubernetes/encryption-config.yaml \
+                --service-node-port-range=30000-65000 \
+                --tls-cert-file=/etc/kubernetes/kubernetes.pem \
+                --tls-private-key-file=/etc/kubernetes/kubernetes-key.pem \
+                --client-ca-file=/etc/kubernetes/ca.pem \
+                --kubelet-client-certificate=/etc/kubernetes/kubernetes.pem \
+                --kubelet-client-key=/etc/kubernetes/kubernetes-key.pem \
+                --service-account-key-file=/etc/kubernetes/ca-key.pem \
+                --etcd-cafile=/etc/kubernetes/ca.pem \
+                --etcd-certfile=/etc/kubernetes/kubernetes.pem \
+                --etcd-keyfile=/etc/kubernetes/kubernetes-key.pem \
+                --enable-swagger-ui=true \
+                --apiserver-count=3 \
+                --audit-log-maxage=30 \
+                --audit-log-maxbackup=3 \
+                --audit-log-maxsize=100 \
+                --audit-log-path=/var/lib/audit.log \
+                --event-ttl=1h"

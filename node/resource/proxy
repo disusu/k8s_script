@@ -1,0 +1,11 @@
+###
+# kubernetes proxy config
+# default config should be adequate
+# Add your own!
+KUBE_PROXY_ARGS="--bind-address=192.168.117.133 \
+                --hostname-override=192.168.117.133 \
+                --kubeconfig=/etc/kubernetes/kube-proxy.kubeconfig \
+                --proxy-mode=ipvs \
+                --masquerade-all \
+                --ipvs-scheduler=rr \
+                --cluster-cidr=CLUSTER_CIDR"
