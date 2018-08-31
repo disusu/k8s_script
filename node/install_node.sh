@@ -57,10 +57,15 @@ function INIT_FILE() {
 #install conntrack-tools
    yum install -y conntrack-tools &>/dev/null
 #install kubelet,kube-proxy
-   LOG_PRINT INFO "Install Node Beginning"
-   wget -c -P ${NODE_INSTALL_PATH} http://mirrors.longzhu.cn/src/kubernetes-1.11.2/kubernetes-node-linux-amd64.tar.gz &>/dev/null
-   tar -xf ${NODE_INSTALL_PATH}/kubernetes-node-linux-amd64.tar.gz -C ${NODE_INSTALL_PATH} && cp ${NODE_INSTALL_PATH}/kubernetes/node/bin/{kubectl,kubelet,kube-proxy} /usr/local/bin/
-   LOG_PRINT OK "Install Node Finish"
+   if [[ $INSTALL == YES ]];then
+    LOG_PRINT INFO "Install Node Beginning"
+    wget -c -P ${NODE_INSTALL_PATH} http://mirrors.dilinux.cn/src/1.11.2/kubernetes-node-linux-amd64.tar.gz &>/dev/null
+    tar -xf ${NODE_INSTALL_PATH}/kubernetes-node-linux-amd64.tar.gz -C ${NODE_INSTALL_PATH} && cp ${NODE_INSTALL_PATH}/kubernetes/node/bin/{kubectl,kubelet,kube-proxy} /usr/local/bin/
+    LOG_PRINT OK "Install Node Finish"
+   else
+    LOG_PRINT INFO "You Already Installed kubelet,kube-proxy"
+    sleep 5
+   fi
 #kubelet
    swapoff -a
    cat ${RESOURCE_PATH}/config > ${CONFIG_FILE_PATH}/config

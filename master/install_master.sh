@@ -53,10 +53,15 @@ function CHECK_STATUS() {
 }
 
 function INSTALL_EXEC() {
-   wget -c -P ${MASTER_INSTALL_PATH} http://mirrors.longzhu.cn/src/kubernetes-1.11.2/kubernetes-server-linux-amd64.tar.gz &>/dev/null
-   tar -xf ${MASTER_INSTALL_PATH}/kubernetes-server-linux-amd64.tar.gz -C ${MASTER_INSTALL_PATH}
-   cp ${MASTER_INSTALL_PATH}/kubernetes/server/bin/{kube-scheduler,kube-controller-manager,kube-apiserver} /usr/local/bin/
-   CHECK_STATUS "Install Server Exec File"
+   if [[ $INSTALL == YES ]];then
+    wget -c -P ${MASTER_INSTALL_PATH} http://mirrors.dilinux.cn/src/1.11.2/kubernetes-server-linux-amd64.tar.gz &>/dev/null
+    tar -xf ${MASTER_INSTALL_PATH}/kubernetes-server-linux-amd64.tar.gz -C ${MASTER_INSTALL_PATH}
+    cp ${MASTER_INSTALL_PATH}/kubernetes/server/bin/{kube-scheduler,kube-controller-manager,kube-apiserver} /usr/local/bin/
+    CHECK_STATUS "Install Server Exec File"
+   else
+    LOG_PRINT INFO "You Already Installed kube-scheduler,kube-controller-manager,kube-apiserver"
+    sleep 5
+   fi
 }
 
 function INIT_FILE() {

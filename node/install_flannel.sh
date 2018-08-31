@@ -54,9 +54,14 @@ function CHECK_STATUS() {
 
 function INIT_NETWORK() {
 #install flanneld
-  wget -c -P ${FLANNELD_INSTALL_PATH} http://mirrors.longzhu.cn/src/flannel-v0.10.0-linux-amd64.tar.gz &>/dev/null
-  tar -xf ${FLANNELD_INSTALL_PATH}/flannel-v0.10.0-linux-amd64.tar.gz -C ${FLANNELD_INSTALL_PATH} && cp ${FLANNELD_INSTALL_PATH}/{flanneld,mk-docker-opts.sh} /usr/local/bin/
-  LOG_PRINT OK "Flannel Install"
+  if [[ $INSTALL == YES ]];then
+   wget -c -P ${FLANNELD_INSTALL_PATH} http://mirrors.dilinux.cn/src/flannel-v0.10.0-linux-amd64.tar.gz &>/dev/null
+   tar -xf ${FLANNELD_INSTALL_PATH}/flannel-v0.10.0-linux-amd64.tar.gz -C ${FLANNELD_INSTALL_PATH} && cp ${FLANNELD_INSTALL_PATH}/{flanneld,mk-docker-opts.sh} /usr/local/bin/
+   LOG_PRINT OK "Flannel Install"
+  else
+   LOG_PRINT INFO "You Already Installed Flannel"
+   sleep 5
+  fi
   sed "s@ETCD_IPS@${ETCD_ENDPOINTS}@g" ${RESOURCE_PATH}/flanneld.service > /usr/lib/systemd/system/flanneld.service
   systemctl daemon-reload
   systemctl enable flanneld.service &>/dev/null

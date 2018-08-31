@@ -62,11 +62,16 @@ function INSTALL_CFSSL() {
 }
 
 function INSTALL_EXEC() {
-   LOG_PRINT INFO "Beginning Install Kubectl......"
-   wget -c -P ${CLIENT_INSTALL_PATH} http://mirrors.longzhu.cn/src/kubernetes-1.11.2/kubernetes-client-linux-amd64.tar.gz &>/dev/null
-   tar -xf ${CLIENT_INSTALL_PATH}/kubernetes-client-linux-amd64.tar.gz -C ${CLIENT_INSTALL_PATH}
-   cp ${CLIENT_INSTALL_PATH}/kubernetes/client/bin/kubectl /usr/local/bin/
-   CHECK_STATUS "Install Kubectl Exec File"
+   if [[ $INSTALL == YES ]];then
+    LOG_PRINT INFO "Beginning Install Kubectl......"
+    wget -c -P ${CLIENT_INSTALL_PATH} http://mirrors.dilinux.cn/src/1.11.2/kubernetes-client-linux-amd64.tar.gz &>/dev/null
+    tar -xf ${CLIENT_INSTALL_PATH}/kubernetes-client-linux-amd64.tar.gz -C ${CLIENT_INSTALL_PATH}
+    cp ${CLIENT_INSTALL_PATH}/kubernetes/client/bin/kubectl /usr/local/bin/
+    CHECK_STATUS "Install Kubectl Exec File"
+   else
+    LOG_PRINT INFO "You Already Installed Kubectl"
+    sleep 5
+   fi
 }
 
 function CREATE_TLS() {

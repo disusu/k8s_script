@@ -70,7 +70,13 @@ function MUST_INPUT() {
      LOG_PRINT OK "Master Ip Is $MASTER_IP"
    fi
    OUT_ENV "MASTER_IP=$MASTER_IP"
-
+   read -p "Do You Want Use Yourself Package? [Y/N]: " PARA_ONE
+   if [[ $PARA_ONE == Y || $PARA_ONE == y ]];then
+      LOG_PRINT INFO "You Must Install K8s Exec File Under Dir /usr/local/bin/"
+      OUT_ENV "INSTALL=NO"
+   else
+      OUT_ENV "INSTALL=YES"
+   fi
    read -p "Please Input Docker Hub Address(eg:hub.xxx.cn): " DOCKER_REGISTRY
    LOG_PRINT OK "Docker Hub Address Is $DOCKER_REGISTRY"
    OUT_ENV "DOCKER_REGISTRY=$DOCKER_REGISTRY"
@@ -93,6 +99,7 @@ function MUST_INPUT() {
 
    OUT_ENV "MANAGER_IP=$MASTER_IP"
    OUT_ENV "SCHEDULER_IP=$MASTER_IP"
+
 
    read -p "Are You sure That You Input is true? [Y/N]: " PARA
    if [[ $PARA == Y || $PARA == y ]];then

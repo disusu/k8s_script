@@ -53,9 +53,14 @@ function CHECK_STATUS() {
 
 #安装二进制文件到相应的目录
 function INSTALL_EXEC() {
-   wget -c -P ${ETCD_INSTALL_PATH} http://mirrors.longzhu.cn/src/etcd-3.3.8/etcd-v3.3.8-linux-amd64.tar.gz &>/dev/null 
-   tar -xf ${ETCD_INSTALL_PATH}/etcd-v3.3.8-linux-amd64.tar.gz -C ${ETCD_INSTALL_PATH} && \
-   cp ${ETCD_INSTALL_PATH}/etcd-v3.3.8-linux-amd64/{etcd,etcdctl} /usr/local/bin/
+   if [[ $INSTALL == YES ]];then
+    wget -c -P ${ETCD_INSTALL_PATH} http://mirrors.dilinux.cn/src/etcd-v3.3.8-linux-amd64.tar.gz &>/dev/null 
+    tar -xf ${ETCD_INSTALL_PATH}/etcd-v3.3.8-linux-amd64.tar.gz -C ${ETCD_INSTALL_PATH} && \
+    cp ${ETCD_INSTALL_PATH}/etcd-v3.3.8-linux-amd64/{etcd,etcdctl} /usr/local/bin/
+   else
+    LOG_PRINT INFO "You Already Installed Etcd And Etcdctl"
+    sleep 5
+   fi
 }
 
 #初始化依赖文件
