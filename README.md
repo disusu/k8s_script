@@ -18,7 +18,7 @@ cd k8s_script-1.0.0/enviroment/
 ./init_env.sh --auto(有些变量为默认值) 或者 ./init_env.sh --control(变量为自定义) #会生成一个env.sh文件（重要）
 cp env.sh ../etcd/ && cp env.sh ../master/ && cp env.sh ../node/ #将生成的全局环境变量文件拷贝到相应的工作目录夹
 ```
-第三步：初始化系统并创建秘钥(在master节点上)
+第三步：初始化系统并创建秘钥(在master节点上，注意env.sh要在安装目录下)
 ```
 cd k8s_script-1.0.0/master
 ./init_system.sh #初始化系统、执行完之后会自动重启
@@ -27,7 +27,7 @@ cd k8s_script-1.0.0/master
 ```
 至此，上述工作做完之后环境变量、认证的证书都已经准备完毕</br>
 
-在etcd节点上执行安装etcd的脚本（需要三个节点）：
+在etcd节点上执行安装etcd的脚本（需要三个节点，注意env.sh要在安装目录下）：
 ```
 cd k8s_script-1.0.0/etcd
 ./init_system.sh #初始化系统，如果已经初始化过的就不用执行该脚本了
@@ -42,12 +42,12 @@ etcdctl \
   cluster-health #检查etcd的集群健康
 ```
 etcd启动之后开始安装k8s主要的组件:</br>
-在master节点上执行安装master的脚本（目前是单节点）：
+在master节点上执行安装master的脚本（目前是单节点，注意env.sh要在安装目录下）：
 ```
 cd k8s_script-1.0.0/master
 ./install_master.sh #执行完毕之后启动三个master组件
 ```
-在node节点上执行安装flannel、kubelet和kube-proxy组件
+在node节点上执行安装flannel、kubelet和kube-proxy组件(注意env.sh要在安装目录下)
 ```
 ./init_system.sh #初始化系统，已经初始化的就不用执行了
 ./install_flannel.sh #安装flannel,并直接启动flannel和docker
