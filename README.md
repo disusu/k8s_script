@@ -49,6 +49,7 @@ cd k8s_script-1.0.0/master
 ```
 在node节点上执行安装flannel、kubelet和kube-proxy组件(注意env.sh要在安装目录下)
 ```
+cd k8s_script-1.0.0/node
 ./init_system.sh #初始化系统，已经初始化的就不用执行了
 ./install_flannel.sh #安装flannel,并直接启动flannel和docker
 ./install_node.sh #安装node组件，然后启动kubelet、kube-proxy
