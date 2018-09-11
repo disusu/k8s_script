@@ -174,7 +174,7 @@ function main() {
   CREATE_KUBECONFIG
   LOG_PRINT OK "Note: Ssl File Information:" 
   find $CONFIG_FILE_PATH -type f
-  tar -zcPf /tmp/ca-file.tar.gz /etc/kubernetes
-  LOG_PRINT OK "Note: Now You Must Send Tar /tmp/ca-file.tar.gz To Other Node And Exec 'tar -xPf ca-file.tar.gz'"
+  tar -zcPf $(pwd)/ca-file/ca-file.tar.gz /etc/kubernetes
+  LOG_PRINT OK "Note: Now You Must Send Tar Package $(pwd)/ca-file/ca-file.tar.gz To Other Node And Exec 'tar -xPf ca-file.tar.gz'"
 }
 main

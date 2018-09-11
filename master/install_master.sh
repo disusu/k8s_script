@@ -115,7 +115,14 @@ function main() {
   ENCRYPTION_KEY=$(head -c 32 /dev/urandom | base64)
   INSTALL_EXEC
   INIT_FILE
-  LOG_PRINT OK "Now You Can Exec Script: systemctl start kube-apiserver && systemctl start kube-controller-manager && systemctl start kube-scheduler"
+  systemctl start kube-apiserver
+  CHECK_STATUS "Start kube-apiserver"
+  systemctl start kube-controller-manager
+  CHECK_STATUS "Start kube-controller-manager"
+  systemctl start kube-scheduler
+  CHECK_STATUS "Start kube-scheduler"
+  kubectl create clusterrolebinding kubelet-bootstrap --clusterrole=system:node-bootstrapper --group=system:bootstrappers
+  CHECK_STATUS "Create Clusterrolebinding"
 }
 
 main
