@@ -54,3 +54,15 @@ cd k8s_script-1.0.0/node
 ./install_flannel.sh #安装flannel,并直接启动flannel和docker
 ./install_node.sh #安装node组件，然后启动kubelet、kube-proxy
 ```
+kubelet 启动后使用 --bootstrap-kubeconfig 向 kube-apiserver 发送 CSR 请求，当这个 CSR 被 approve 后，kube-controller-manager 为 kubelet 创建 TLS 客户端证书、私钥和 --kubeletconfig 文件 </br>
+如何批准CSR请求：</br>
+```
+kubectl get csr #获取请求
+kubectl certificate approve xxx #批准请求，其中xxx是CSR名称
+kubectl get nodes #获取节点信息
+```
+防止以后新增节点又要批准请求一次，可以执行以下命令来自动 approve CSR 请求
+```
+cd k8s_script-1.0.0/master
+kubectl apply -f csr-crb.yaml #自动 approve client、renew client、renew server 证书
+```
