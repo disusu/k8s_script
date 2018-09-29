@@ -14,7 +14,7 @@ wget http://mirrors.dilinux.cn/src/k8s_script/k8s_script.tar.gz
 第二步：进入目录先执行环境变量的初始化脚本
 ```
 tar -xf k8s_script.tar.gz
-cd k8s_script/enviroment/
+cd k8s_script/environment/
 ./init_env.sh --auto(有些变量为默认值) 或者 ./init_env.sh --control(变量为自定义) #会生成一个env.sh文件（重要）
 cp env.sh ../etcd/ && cp env.sh ../master/ && cp env.sh ../node/ #将生成的全局环境变量文件拷贝到相应的工作目录夹
 ```
