@@ -3,7 +3,7 @@
 # Filename: install_master.sh
 # Date: Mon Aug 15 CST 2018
 # Author: SuDi
-# Email: i-disu@pptv.com
+# Email: disusre@gmail.com
 # Description: Interactive or Automatic Install K8s Master
 # Config: /app/script/resource/{config,kube-scheduler,kube-apiserver,kube-controller-manager}
 # Service Config: /app/script/resource/{kube-apiserver.service,kube-scheduler.service,kube-scheduler.service}

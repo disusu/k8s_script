@@ -2,7 +2,7 @@
 # Filename: init_env.sh
 # Date: Mon Aug 23 CST 2018
 # Author: SuDi
-# Email: i-disu@pptv.com
+# Email: disusre@gmail.com
 # Description: Init K8s Enviroument
 
 if [ "$1" == "--help" ]; then

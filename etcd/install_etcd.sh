@@ -3,7 +3,7 @@
 # Filename: install_etcd.sh
 # Date: Mon Aug 14 CST 2018
 # Author: SuDi
-# Email: i-disu@pptv.com
+# Email: disusre@gmail.com
 # Description: Interactive or Automatic Install etcd
 
 if [ "$1" == "--help" ]; then

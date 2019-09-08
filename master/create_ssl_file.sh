@@ -3,7 +3,7 @@
 # Filename: create_ssl_file.sh
 # Date: Mon Aug 13 CST 2018
 # Author: SuDi
-# Email: i-disu@pptv.com
+# Email: disusre@gmail.com
 # Description: Interactive or Automatic create ssl file
 
 if [ "$1" == "--help" ]; then

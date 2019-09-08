@@ -3,7 +3,7 @@
 # Filename: init_systemd.sh
 # Date: Mon Aug 23 CST 2018
 # Author: SuDi
-# Email: i-disu@pptv.com
+# Email: disusre@gmail.com
 # Description: Interactive or Automatic Init Systemd
 
 if [ "$1" == "--help" ]; then

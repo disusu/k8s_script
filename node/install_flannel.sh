@@ -3,7 +3,7 @@
 # Filename: install_flannel.sh
 # Date: Mon Aug 15 CST 2018
 # Author: SuDi
-# Email: i-disu@pptv.com
+# Email: disusre@gmail.com
 # Description: Interactive or Automatic Install K8s Network Flannel
 # Config: /app/script/resource/flanneld.service
 
